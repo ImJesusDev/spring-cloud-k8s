@@ -2,7 +2,7 @@ docker build -t jdiaz740/eureka-server:latest -t jdiaz740/eureka-server:$TAG -f 
 docker build -t jdiaz740/config-server:latest -t jdiaz740/config-server:$TAG --build-arg ENC_PASS=${JASYPT_PASS} -f ./config-server/Dockerfile ./config-server
 docker build -t jdiaz740/auth-server:latest -t jdiaz740/auth-server:$TAG -f ./auth-server/Dockerfile ./auth-server
 docker build -t jdiaz740/zuul-server:latest -t jdiaz740/zuul-server:$TAG -f ./zuul-server/Dockerfile ./zuul-server
-docker build -t jdiaz740/users-service:latest -t jdiaz740/users-service:$TAG -f ./users-service/Dockerfile ./users-servicedocker buid -t jdiaz740/eureka-server -f ./eureka-server/Dockerfile ./eureka-server
+docker build -t jdiaz740/users-service:latest -t jdiaz740/users-service:$TAG -f ./users-service/Dockerfile ./users-service
 
 docker push jdiaz740/config-server:latest
 docker push jdiaz740/auth-server:latest
