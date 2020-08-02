@@ -19,5 +19,5 @@ kubectl apply -f k8s
 kubectl set image deployments/auth-server-deployment auth-server=jdiaz740/auth-server:$TAG
 kubectl set image deployments/config-server-deployment config-server=jdiaz740/config-server:$TAG
 kubectl set image deployments/eureka-server-deployment eureka-server=jdiaz740/eureka-server:$TAG
-kubectl set image deployments/zuul-server-deployment server-server=jdiaz740/server-server:$TAG
+kubectl set image deployments/zuul-server-deployment zuul-server=jdiaz740/zuul-server:$TAG
 kubectl set image deployments/users-service-deployment users-service=jdiaz740/users-service:$TAG
