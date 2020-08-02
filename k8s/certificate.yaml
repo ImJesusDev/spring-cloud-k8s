@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1alpha2
+king: Certificate
+metadata:
+  name: im-jesus-dev-tls
+spec:
+  secretName: im-jesus-dev
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: imjesus.dev
+  dnsName:
+    - imjesus.dev
+    - www.imjesus.dev
+  acme:
+    config:
+      - http01:
+          ingressClass: nginx
+        domains:
+          - imjesus.dev
+          - www.imjesus.dev
