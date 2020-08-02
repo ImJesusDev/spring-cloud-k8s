@@ -8,11 +8,13 @@ docker push jdiaz740/config-server:latest
 docker push jdiaz740/auth-server:latest
 docker push jdiaz740/zuul-server:latest
 docker push jdiaz740/users-service:latest
+docker push jdiaz740/eureka-service:latest
 
 docker push jdiaz740/config-server:$TAG
 docker push jdiaz740/auth-server:$TAG
 docker push jdiaz740/zuul-server:$TAG
 docker push jdiaz740/users-service:$TAG
+docker push jdiaz740/eureka-service:$TAG
 
 kubectl apply -f k8s
 
