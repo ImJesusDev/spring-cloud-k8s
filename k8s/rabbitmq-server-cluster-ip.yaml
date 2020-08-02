@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq-server-cluster-ip
+spec:
+  type: ClusterIP
+  selector:
+    component: rabbitmq-server
+  ports:
+  - port: 5672
+    targetPort: 5672

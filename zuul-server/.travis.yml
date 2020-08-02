@@ -1,0 +1,12 @@
+sudo: required
+language: java
+jdk:
+ - openjdk12
+services:
+    - docker
+
+before_install:
+    - mvn clean install
+
+script:
+    - docker build -t jdiaz740/zuul-server .

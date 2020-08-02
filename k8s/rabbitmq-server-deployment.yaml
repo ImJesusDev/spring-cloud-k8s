@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq-server-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: rabbitmq-server
+  template:
+    metadata:
+      labels:
+        component: rabbitmq-server
+    spec:
+      containers:
+      - name: rabbitmq-server
+        image: rabbitmq:3.8-management-alpine
+        ports:
+        - containerPort: 5672
+          

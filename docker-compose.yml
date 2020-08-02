@@ -1,0 +1,93 @@
+version: '3.7'
+services:
+  config-server:
+    image: jdiaz740/config-server
+    ports:
+      - "8888:8888"
+    restart: always
+    networks:
+      - microservices
+  eureka-server:
+    image: jdiaz740/eureka-server
+    ports:
+      - "8761:8761"
+    restart: always
+    networks:
+      - microservices
+  auth-server:
+    image: jdiaz740/auth-server
+    ports:
+      - "9100:9100"
+    restart: always
+    networks:
+      - microservices 
+    depends_on: 
+      - config-server
+      - eureka-server
+      - users-service
+  zuul-server:
+    image: jdiaz740/zuul-server
+    ports:
+      - "8090:8090"
+    restart: always
+    networks:
+      - microservices
+    depends_on: 
+      - config-server
+      - eureka-server
+      - users-service
+      - auth-server
+  users-service:
+    image: jdiaz740/users-service
+    ports:
+      - "8070:8070"
+    restart: always
+    networks:
+      - microservices
+    depends_on: 
+      - config-server
+      - eureka-server
+      - postgres-server
+  postgres-server:
+    image: postgres:12-alpine
+    ports:
+      - "5432:5432"
+    restart: always
+    networks:
+      - microservices
+    environment: 
+      POSTGRES_DB: users_microservice
+      POSTGRES_PASSWORD: 123
+  rabbitmq-server:
+    image: rabbitmq:3.8-management-alpine
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    restart: always
+    networks:
+      - microservices
+  cassandra-server:
+    image: cassandra:latest
+    ports:
+      - "9042:9042"
+    restart: always
+    networks:
+      - microservices
+  zipkin-server:
+    image: jdiaz740/zipkin-server
+    ports:
+      - "9411:9411"
+    restart: always
+    networks:
+      - microservices
+    depends_on: 
+        - rabbitmq-server
+        - cassandra-server
+    environment: 
+      RABBIT_ADDRESSES: rabbitmq-server:5672
+      STORAGE_TYPE: cassandra3
+      CASSANDRA_USERNAME:
+      CASSANDRA_PASSWORD:
+      CASSANDRA_CONTACT_POINTS: cassandra-server:9042
+networks:
+  microservices:

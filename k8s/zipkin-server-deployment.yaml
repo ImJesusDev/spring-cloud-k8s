@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zipkin-server-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: zipkin-server
+  template:
+    metadata:
+      labels:
+        component: zipkin-server
+    spec:
+      containers:
+      - name: zipkin-server
+        image: jdiaz740/zipkin-server
+        ports:
+        - containerPort: 9411
+        env:
+          - name: STORAGE_TYPE
+            value: cassandra3
+          - name: RABBIT_ADDRESSES
+            value: rabbitmq-server-cluster-ip:5672
+          - name: CASSANDRA_CONTACT_POINTS
+            value: cassandra-server-cluster-ip:9042

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eureka-server-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: eureka-server
+  template:
+    metadata:
+      labels:
+        component: eureka-server
+    spec:
+      containers:
+      - name: eureka-server
+        image: jdiaz740/eureka-server
+        ports:
+        - containerPort: 8090

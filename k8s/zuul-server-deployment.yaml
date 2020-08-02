@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zuul-server-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: zuul-server
+  template:
+    metadata:
+      labels:
+        component: zuul-server
+    spec:
+      containers:
+      - name: zuul-server
+        image: jdiaz740/zuul-server
+        ports:
+        - containerPort: 8090

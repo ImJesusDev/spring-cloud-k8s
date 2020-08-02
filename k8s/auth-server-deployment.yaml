@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-server-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: auth-server
+  template:
+    metadata:
+      labels:
+        component: auth-server
+    spec:
+      containers:
+      - name: auth-server
+        image: jdiaz740/auth-server
+        ports:
+        - containerPort: 9100
