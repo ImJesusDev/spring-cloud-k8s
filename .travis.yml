@@ -20,15 +20,16 @@ before_install:
     - gcloud container clusters get-credentials spring-cloud-k8s
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin	
 
-
 script:
+    - cd config-server
+    - mvn clean install -Djasypt.encryptor.password=${JASYPT_PASS}
+    - cd ..
     - (cd users-commons; mvn clean install)
     - mvn install:install-file -Dfile=users-commons/target/users-commons-0.0.1-SNAPSHOT.jar -DgroupId=com.jdiaz.users.commons -DartifactId=users-commons -Dversion=0.0.1-SNAPSHOT -Dpackaging=jar
     - (cd users-users-service; mvn clean install)
     - (cd auth-server; mvn clean install)
     - (cd eureka-server; mvn clean install)
     - (cd zuul-server; mvn clean install)
-    - (cd config-server; mvn clean install -Djasypt.encryptor.password=${JASYPT_PASS})
 
 deploy:
     provider: script
