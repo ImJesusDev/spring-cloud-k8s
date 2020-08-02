@@ -1,11 +1,11 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: ingress-service-zipkin
+  name: ingress-service-rabbitmq
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/use-regex: 'true'
-    # nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
     certmanager.k8s.io/cluster-issuer: 'letsencrypt-prod'
     nginx.ingress.kubernetes.io/ssl-redirect: 'true'
 
@@ -19,14 +19,14 @@ spec:
     - host: imjesus.dev
       http:
         paths:
-          - path: /zipkin/?(.*)
+          - path: /rabbitmq/?(.*)
             backend:
-              serviceName: zipkin-server-cluster-ip
-              servicePort: 9411
+              serviceName: rabbitmq-server-cluster-ip
+              servicePort: 15672
     - host: www.imjesus.dev
       http:
         paths:
-          - path: /zipkin/?(.*)
+          - path: /rabbitmq/?(.*)
             backend:
-              serviceName: zipkin-server-cluster-ip
-              servicePort: 9411
+              serviceName: rabbitmq-server-cluster-ip
+              servicePort: 15672

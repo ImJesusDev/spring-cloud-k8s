@@ -19,14 +19,14 @@ spec:
     - host: imjesus.dev
       http:
         paths:
-          - path: /eureka-dashboard/?(.*)
+          - path: //?(.*)
             backend:
               serviceName: eureka-server-cluster-ip
               servicePort: 8761
     - host: www.imjesus.dev
       http:
         paths:
-          - path: /eureka-dashboard/?(.*)
+          - path: //?(.*)
             backend:
               serviceName: eureka-server-cluster-ip
               servicePort: 8761
